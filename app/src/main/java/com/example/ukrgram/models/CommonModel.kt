@@ -1,6 +1,6 @@
 package com.example.ukrgram.models
 
-data class User(
+data class CommonModel(
     val id: String = "",
     var username: String = "",
     var bio: String = "",

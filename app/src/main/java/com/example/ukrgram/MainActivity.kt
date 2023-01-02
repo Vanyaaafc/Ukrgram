@@ -1,20 +1,19 @@
 package com.example.ukrgram
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.example.ukrgram.activities.RegisterActivity
 import com.example.ukrgram.databinding.ActivityMainBinding
-import com.example.ukrgram.models.User
 import com.example.ukrgram.ui.fragments.ChatsFragment
 import com.example.ukrgram.ui.objects.AppDrawer
 import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.FirebaseAuth
-import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,9 +27,17 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         APP_ACTIVITY = this
-        initFields()
-        initFunc()
+        initFirebase()
+        initUser {
+            CoroutineScope(Dispatchers.IO).launch {
+                initContacts()
+            }
+            initFields()
+            initFunc()
+        }
     }
+
+
 
     private fun initFunc() {
         if (AUTH.currentUser != null) {
@@ -47,14 +54,27 @@ class MainActivity : AppCompatActivity() {
         mToolbar = mBinding.mainToolBar
         mAppDrawer = AppDrawer(this, mToolbar)
         AUTH = FirebaseAuth.getInstance()
-        initFirebase()
-        initUser()
+
     }
 
-    private fun initUser() {
-        REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-            .addListenerForSingleValueEvent(AppValueEventListener {
-                USER = it.getValue(User::class.java) ?: User()
-            })
+    override fun onStart() {
+        super.onStart()
+        AppStates.updateState(AppStates.ONLINE)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        AppStates.updateState(AppStates.OFFLINE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (ContextCompat.checkSelfPermission(APP_ACTIVITY, READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            initContacts()
+        }
     }
 }

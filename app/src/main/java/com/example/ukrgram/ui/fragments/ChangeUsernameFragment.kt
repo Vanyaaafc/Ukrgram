@@ -38,6 +38,7 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     updateCurrentUsername()
+                    hideKeyboard()
                 }
             }
     }

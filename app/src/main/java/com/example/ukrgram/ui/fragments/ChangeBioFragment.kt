@@ -20,6 +20,7 @@ class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {
                     showToast(getString(R.string.toast_data_update))
                     USER.bio = newBio
                     fragmentManager?. popBackStack()
+                    hideKeyboard()
                 }
             }
     }

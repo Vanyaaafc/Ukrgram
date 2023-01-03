@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
     lateinit var mAppDrawer: AppDrawer
-    private lateinit var mToolbar: Toolbar
+    lateinit var mToolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun initFunc() {
         if (AUTH.currentUser != null) {
             setSupportActionBar(mToolbar)
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFields() {
         mToolbar = mBinding.mainToolBar
-        mAppDrawer = AppDrawer(this, mToolbar)
+        mAppDrawer = AppDrawer()
         AUTH = FirebaseAuth.getInstance()
 
     }
@@ -73,7 +72,9 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (ContextCompat.checkSelfPermission(APP_ACTIVITY, READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(APP_ACTIVITY,
+                READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+        ) {
             initContacts()
         }
     }

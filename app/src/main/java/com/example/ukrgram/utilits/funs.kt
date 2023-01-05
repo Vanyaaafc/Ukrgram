@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ukrgram.R
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 
 fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
@@ -25,11 +24,11 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = tr
     if (addStack) {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.dataContainer, fragment)
+            .replace(R.id.data_сontainer, fragment)
             .commit()
     } else {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.dataContainer, fragment)
+            .replace(R.id.data_сontainer, fragment)
             .commit()
     }
 }
@@ -37,7 +36,7 @@ fun AppCompatActivity.replaceFragment(fragment: Fragment, addStack: Boolean = tr
 fun Fragment.replaceFragment(fragment: Fragment) {
     this.parentFragmentManager.beginTransaction()
         .addToBackStack(null)
-        .replace(R.id.dataContainer, fragment)
+        .replace(R.id.data_сontainer, fragment)
         .commit()
 }
 

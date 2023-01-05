@@ -10,7 +10,6 @@ import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.*
@@ -23,6 +22,8 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     private lateinit var mAdapter: FirebaseRecyclerAdapter<CommonModel, ContactsHolder>
     private lateinit var mRefContacts: DatabaseReference
     private lateinit var mRefUsers: DatabaseReference
+    private lateinit var mRefUsersListener: AppValueEventListener
+    private var mapListeners = hashMapOf<DatabaseReference, AppValueEventListener>()
 
 
     override fun onResume() {
@@ -41,11 +42,12 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
 
         mAdapter = object : FirebaseRecyclerAdapter<CommonModel, ContactsHolder>(options) {
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsHolder {
+                //запускается тогда когда адаптер получает доступ к ViewGroup
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.contact_item, parent, false)
                 return ContactsHolder(view)
             }
-
+//Запускает holder
             override fun onBindViewHolder(
                 holder: ContactsHolder,
                 position: Int,
@@ -53,14 +55,17 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
             ) {
                 mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(model.id)
 
-                mRefUsers.addValueEventListener(AppValueEventListener {
+                mRefUsersListener = AppValueEventListener {
                     val contact = it.getCommonModel()
 
                     holder.name.text = contact.fullname
                     holder.status.text = contact.state
                     holder.photo.downloadAndSetImage(contact.photoUrl)
-                })
+                    holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(contact)) }
+                }
 
+                mRefUsers.addValueEventListener(mRefUsersListener)
+                mapListeners[mRefUsers] = mRefUsersListener
 
             }
 
@@ -72,6 +77,10 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     override fun onPause() {
         super.onPause()
         mAdapter.stopListening()
+        println()
+        mapListeners.forEach {
+            it.key.removeEventListener(it.value)
+        }
     }
 
     class ContactsHolder(view: View) : RecyclerView.ViewHolder(view) {

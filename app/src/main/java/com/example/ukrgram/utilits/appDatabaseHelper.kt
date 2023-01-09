@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import android.provider.ContactsContract
 import com.example.ukrgram.models.CommonModel
-import com.example.ukrgram.models.User
+import com.example.ukrgram.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
@@ -16,7 +16,7 @@ import java.util.ArrayList
 lateinit var AUTH: FirebaseAuth
 lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var REF_STORAGE_ROOT: StorageReference
-lateinit var USER: User
+lateinit var USER: UserModel
 lateinit var CURRENT_UID: String
 
 const val NODE_USERS = "users"
@@ -36,7 +36,7 @@ const val CHILD_STATE = "state"
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
     REF_DATABASE_ROOT = FirebaseDatabase.getInstance().reference
-    USER = User()
+    USER = UserModel()
     CURRENT_UID = AUTH.currentUser?.uid.toString()
     REF_STORAGE_ROOT = FirebaseStorage.getInstance().reference
 }
@@ -66,7 +66,7 @@ inline fun putImageToStorage(uri: Uri, path: StorageReference, crossinline funct
 inline fun initUser(crossinline function: () -> Unit) {
     REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
         .addListenerForSingleValueEvent(AppValueEventListener {
-            USER = it.getValue(User::class.java) ?: User()
+            USER = it.getValue(UserModel::class.java) ?: UserModel()
             if (USER.username.isEmpty()) {
                 USER.username = CURRENT_UID
             }
@@ -118,3 +118,6 @@ fun updatePhonesToDataBase(arrayContacts: ArrayList<CommonModel>) {
 
 fun DataSnapshot.getCommonModel(): CommonModel =
     this.getValue(CommonModel::class.java) ?: CommonModel()
+
+fun DataSnapshot.getUserModel(): UserModel =
+    this.getValue(UserModel::class.java) ?: UserModel()

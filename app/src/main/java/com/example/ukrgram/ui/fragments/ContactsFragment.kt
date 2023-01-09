@@ -84,8 +84,8 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     }
 
     class ContactsHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.contact_fullname
-        val status: TextView = view.contact_status
+        val name: TextView = view.toolbar_chat_fullname
+        val status: TextView = view.toolbar_chat_status
         val photo: CircleImageView = view.contact_photo
     }
 }

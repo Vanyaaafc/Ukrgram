@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
@@ -29,22 +30,15 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     }
 
     private fun initFields() {
-        mRootView.findViewById<TextView>(R.id.settings_bio).text = USER.bio
-        mRootView.findViewById<TextView>(R.id.settings_full_name).text = USER.fullname
-        mRootView.findViewById<TextView>(R.id.settings_number_phone).text = USER.phone
-        mRootView.findViewById<TextView>(R.id.settings_status).text = USER.state
-        mRootView.findViewById<TextView>(R.id.settings_username).text = USER.username
-        mRootView.findViewById<View>(R.id.settings_btn_change_username).setOnClickListener {
-            replaceFragment(ChangeUsernameFragment())
-        }
-        mRootView.findViewById<View>(R.id.settings_btn_change_bio).setOnClickListener {
-            replaceFragment(ChangeBioFragment())
-        }
-        mRootView.findViewById<View>(R.id.settings_change_photo)
-            .setOnClickListener { changePhotoUser() }
-        mRootView.findViewById<CircleImageView>(R.id.settings_user_photo)
-            .downloadAndSetImage(USER.photoUrl)
-
+        settings_bio.text = USER.bio
+        settings_full_name.text = USER.fullname
+        settings_number_phone.text = USER.phone
+        settings_status.text = USER.state
+        settings_username.text = USER.username
+        settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
+        settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
+        settings_change_photo.setOnClickListener { changePhotoUser() }
+        settings_user_photo.downloadAndSetImage(USER.photoUrl)
     }
 
     private fun changePhotoUser() {
@@ -86,6 +80,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.settings_menu_exit -> {
+                AppStates.updateState(AppStates.OFFLINE)
                 AUTH.signOut()
                 APP_ACTIVITY.replaceActivity(RegisterActivity())
             }

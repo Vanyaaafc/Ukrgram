@@ -1,9 +1,11 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.fragments.single_chat
 
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
+import com.example.ukrgram.ui.fragments.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.google.firebase.database.DatabaseReference
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -19,9 +21,34 @@ class SingleChatFragment(private val contact: CommonModel) :
     private lateinit var mReceivingUser: UserModel
     private lateinit var mToolbarInfo: View
     private lateinit var mRefUser: DatabaseReference
+    private lateinit var mRefMessages: DatabaseReference
+    private lateinit var mAdapter: SingleChatAdapter
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mMessagesListener: AppValueEventListener
+    private var mListMessages = emptyList<CommonModel>()
 
     override fun onResume() {
         super.onResume()
+        initToolbar()
+        initRecycleView()
+    }
+
+    private fun initRecycleView() {
+        mRecyclerView = chat_recycler_view
+        mAdapter = SingleChatAdapter()
+        mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES)
+            .child(CURRENT_UID)
+            .child(contact.id)
+        mRecyclerView.adapter = mAdapter
+        mMessagesListener = AppValueEventListener { dataSnapshot ->
+            mListMessages = dataSnapshot.children.map { it.getCommonModel() }
+            mAdapter.setList(mListMessages)
+            mRecyclerView.smoothScrollToPosition(mAdapter.itemCount)
+        }
+        mRefMessages.addValueEventListener(mMessagesListener)
+    }
+
+    private fun initToolbar() {
         mToolbarInfo = APP_ACTIVITY.mToolbar.toolbar_info
         mToolbarInfo.visibility = View.VISIBLE
         mListenerInfoToolbar = AppValueEventListener {
@@ -55,6 +82,6 @@ class SingleChatFragment(private val contact: CommonModel) :
         super.onPause()
         APP_ACTIVITY.mToolbar.toolbar_info.visibility = View.GONE
         mRefUser.removeEventListener(mListenerInfoToolbar)
-
+        mRefMessages.removeEventListener(mMessagesListener)
     }
 }

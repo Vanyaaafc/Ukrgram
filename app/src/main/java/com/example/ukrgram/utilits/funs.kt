@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
@@ -83,4 +85,10 @@ fun initContacts() {
         cursor?.close()
         updatePhonesToDataBase(arrayContacts)
     }
+}
+
+fun String.asTime(): String {
+    val time = Date(this.toLong())
+    val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+    return timeFormat.format(time)
 }

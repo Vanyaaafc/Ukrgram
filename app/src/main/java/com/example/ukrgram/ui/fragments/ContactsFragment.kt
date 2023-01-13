@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
+import com.example.ukrgram.ui.fragments.single_chat.SingleChatFragment
 import com.example.ukrgram.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions

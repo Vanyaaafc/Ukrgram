@@ -1,14 +1,11 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.fragments.register
 
 import android.view.View
 import android.widget.EditText
 import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
-import com.example.ukrgram.activities.RegisterActivity
-import com.example.ukrgram.utilits.AUTH
-import com.example.ukrgram.utilits.replaceActivity
-import com.example.ukrgram.utilits.replaceFragment
-import com.example.ukrgram.utilits.showToast
+import com.example.ukrgram.ui.fragments.BaseFragment
+import com.example.ukrgram.utilits.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
@@ -27,7 +24,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
                 AUTH.signInWithCredential(credential).addOnCompleteListener {
                     if (it.isSuccessful) {
                         showToast("Добро пожаловать")
-                        (activity as RegisterActivity).replaceActivity(MainActivity())
+                        restartActivity()
                     } else {
                         showToast(it.exception?.message.toString())
                     }
@@ -62,7 +59,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
             mPhoneNumber,
             60,
             TimeUnit.SECONDS,
-            activity as RegisterActivity,
+            APP_ACTIVITY,
             mCallBack
         )
     }

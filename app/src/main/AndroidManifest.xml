@@ -33,12 +33,9 @@
             />
 
         <activity
-            android:windowSoftInputMode="stateVisible|adjustResize"
-            android:name=".activities.RegisterActivity"
-            android:exported="false" />
-        <activity
 
             android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

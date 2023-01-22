@@ -3,6 +3,7 @@ package com.example.ukrgram.utilits
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.provider.ContactsContract
+import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
 import com.google.firebase.auth.FirebaseAuth
@@ -131,4 +132,52 @@ fun sendMessage(message: String, receivingUserID: String, typeText: String, func
         .updateChildren(mapDialog)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun updateCurrentUsername(newUserName: String) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_USERNAME)
+        .setValue(newUserName)
+        .addOnCompleteListener {
+            if (it.isSuccessful) {
+                showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+                deleteOldUsername(newUserName)
+            } else {
+                showToast(it.exception?.message.toString())
+            }
+        }
+}
+
+
+private fun deleteOldUsername(newUserName: String) {
+    REF_DATABASE_ROOT.child(NODE_USERNAMES).child(USER.username)
+        .removeValue()
+        .addOnSuccessListener {
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
+            USER.username = newUserName
+        }.addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun setBioToDatabase(newBio: String) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_BIO)
+        .setValue(newBio)
+        .addOnSuccessListener {
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+            USER.bio = newBio
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
+            hideKeyboard()
+        }.addOnFailureListener { showToast(it.message.toString()) }
+}
+
+
+fun setNameToDatabase(fullname: String) {
+    REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(CHILD_FULLNAME)
+        .setValue(fullname)
+        .addOnSuccessListener {
+            showToast(APP_ACTIVITY.getString(R.string.toast_data_update))
+            USER.fullname = fullname
+            APP_ACTIVITY.mAppDrawer.updateHeader()
+            APP_ACTIVITY.supportFragmentManager.popBackStack()
+            hideKeyboard()
+        }.addOnFailureListener { showToast(it.message.toString()) }
 }

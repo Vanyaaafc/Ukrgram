@@ -1,12 +1,10 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.fragments.register
 
 import android.widget.EditText
-import android.widget.Toast
 import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
-import com.example.ukrgram.activities.RegisterActivity
+import com.example.ukrgram.ui.fragments.BaseFragment
 import com.example.ukrgram.utilits.*
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
@@ -17,7 +15,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
 
     override fun onStart() {
         super.onStart()
-        (activity as RegisterActivity).title = phoneNumber
+        APP_ACTIVITY.title = phoneNumber
         mRootView.findViewById<EditText>(R.id.register_input_code)
             .addTextChangedListener(AppTextWatcher {
                 val string =
@@ -46,7 +44,8 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                         REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
                             .addOnSuccessListener {
                                 showToast("Добро пожаловать")
-                                (activity as RegisterActivity).replaceActivity(MainActivity())
+                                restartActivity()
+                                hideKeyboard()
                             }
                             .addOnFailureListener { showToast(it.message.toString()) }
                     }

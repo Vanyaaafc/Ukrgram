@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.example.ukrgram.activities.RegisterActivity
 import com.example.ukrgram.databinding.ActivityMainBinding
-import com.example.ukrgram.ui.fragments.ChatsFragment
+import com.example.ukrgram.ui.fragments.MainFragment
+import com.example.ukrgram.ui.fragments.register.EnterPhoneNumberFragment
 import com.example.ukrgram.ui.objects.AppDrawer
 import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.FirebaseAuth
@@ -39,12 +39,12 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment(), false)
+            replaceFragment(MainFragment(), false)
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(), false)
 
         }
     }

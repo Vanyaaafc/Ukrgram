@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.utilits.CURRENT_UID
+import com.example.ukrgram.utilits.DiffUtilCallback
 import com.example.ukrgram.utilits.asTime
 import kotlinx.android.synthetic.main.message_item.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
     var mlistMessagesCache = emptyList<CommonModel>()
+    private lateinit var mDiffResult: DiffUtil.DiffResult
 
     class SingleChatHolder(view: View) : RecyclerView.ViewHolder(view) {
         val blocUserMessage: ConstraintLayout = view.bloc_user_message
@@ -54,8 +55,17 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
 
     @SuppressLint("NotifyDataSetChanged")
     fun setList(list: List<CommonModel>) {
-        mlistMessagesCache = list
-        notifyDataSetChanged()
+
+//        notifyDataSetChanged()
+    }
+
+    fun addItem(item: CommonModel) {
+        val newList = mutableListOf<CommonModel>()
+        newList.addAll(mlistMessagesCache)
+        newList.add(item)
+        mDiffResult = DiffUtil.calculateDiff(DiffUtilCallback(mlistMessagesCache, newList))
+        mDiffResult.dispatchUpdatesTo(this)
+        mlistMessagesCache = newList
     }
 }
 

@@ -16,7 +16,6 @@
         android:layout_height="0dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_recycler_view"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/message_item"
             android:background="@color/colorBlueWish"
             android:layout_width="match_parent"

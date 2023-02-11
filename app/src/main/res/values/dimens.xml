@@ -29,6 +29,8 @@
     <dimen name="settings_status_layout_width">0dp</dimen>
     <dimen name="settings_status_layout_marginStart">16dp</dimen>
     <dimen name="settings_ripple_layout_effects_radius">4dp</dimen>
+    <dimen name="chat_image_width">180dp</dimen>
+    <dimen name="chat_image_height">180dp</dimen>
 
 
 <!--Settings fragment-->

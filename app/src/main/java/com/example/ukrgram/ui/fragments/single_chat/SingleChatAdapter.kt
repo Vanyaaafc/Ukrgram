@@ -1,33 +1,38 @@
 package com.example.ukrgram.ui.fragments.single_chat
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
-import com.example.ukrgram.utilits.CURRENT_UID
-import com.example.ukrgram.utilits.DiffUtilCallback
-import com.example.ukrgram.utilits.asTime
+import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.message_item.view.*
 
 class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolder>() {
 
-    var mlistMessagesCache = mutableListOf<CommonModel>()
-    private lateinit var mDiffResult: DiffUtil.DiffResult
+    var mListMessagesCache = mutableListOf<CommonModel>()
 
     class SingleChatHolder(view: View) : RecyclerView.ViewHolder(view) {
+        //Text ViewHolder
         val blocUserMessage: ConstraintLayout = view.bloc_user_message
         val chatUserMessage: TextView = view.chat_user_message
         val chatUserMessageTime: TextView = view.chat_user_message_time
-
         val blocReceivedMessage: ConstraintLayout = view.bloc_received_message
         val chatReceivedMessage: TextView = view.chat_received_message
         val chatReceivedMessageTime: TextView = view.chat_received_message_time
+
+        //Image ViewHolder
+        val blocUserImageMessage: ConstraintLayout = view.bloc_user_image_message
+        val blocReceivedImageMessage: ConstraintLayout = view.bloc_received_image_message
+        val chatUserImage: ImageView = view.chat_user_image
+        val chatReceivedImage: ImageView = view.chat_received_image
+        val chatUserImageMessageTime: TextView = view.chat_user_image_message_time
+        val chatReceivedImageMessageTime: TextView = view.chat_received_image_message_time
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleChatHolder {
@@ -35,21 +40,50 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         return SingleChatHolder(view)
     }
 
-    override fun getItemCount(): Int = mlistMessagesCache.size
+    override fun getItemCount(): Int = mListMessagesCache.size
 
     override fun onBindViewHolder(holder: SingleChatHolder, position: Int) {
-        if (mlistMessagesCache[position].from == CURRENT_UID) {
+        when (mListMessagesCache[position].type) {
+            TYPE_MESSAGE_TEXT -> drawMessageText(holder, position)
+            TYPE_MESSAGE_IMAGE -> drawMessageImage(holder, position)
+        }
+    }
+
+    private fun drawMessageImage(holder: SingleChatHolder, position: Int) {
+
+        holder.blocUserMessage.visibility = View.GONE
+        holder.blocReceivedMessage.visibility = View.GONE
+
+        if (mListMessagesCache[position].from == CURRENT_UID) {
+            holder.blocReceivedImageMessage.visibility = View.GONE
+            holder.blocUserImageMessage.visibility = View.VISIBLE
+            holder.chatUserImage.downloadAndSetImage(mListMessagesCache[position].imageUrl)
+            holder.chatUserImageMessageTime.text = mListMessagesCache[position].timeStamp.toString().asTime()
+        } else {
+            holder.blocReceivedImageMessage.visibility = View.VISIBLE
+            holder.blocUserImageMessage.visibility = View.GONE
+            holder.chatReceivedImage.downloadAndSetImage(mListMessagesCache[position].imageUrl)
+            holder.chatReceivedImageMessageTime.text = mListMessagesCache[position].timeStamp.toString().asTime()
+        }
+    }
+
+    private fun drawMessageText(holder: SingleChatHolder, position: Int) {
+
+        holder.blocReceivedImageMessage.visibility = View.GONE
+        holder.blocUserImageMessage.visibility = View.GONE
+
+        if (mListMessagesCache[position].from == CURRENT_UID) {
             holder.blocUserMessage.visibility = View.VISIBLE
             holder.blocReceivedMessage.visibility = View.GONE
-            holder.chatUserMessage.text = mlistMessagesCache[position].text
+            holder.chatUserMessage.text = mListMessagesCache[position].text
             holder.chatUserMessageTime.text =
-                mlistMessagesCache[position].timeStamp.toString().asTime()
+                mListMessagesCache[position].timeStamp.toString().asTime()
         } else {
             holder.blocUserMessage.visibility = View.GONE
             holder.blocReceivedMessage.visibility = View.VISIBLE
-            holder.chatReceivedMessage.text = mlistMessagesCache[position].text
+            holder.chatReceivedMessage.text = mListMessagesCache[position].text
             holder.chatReceivedMessageTime.text =
-                mlistMessagesCache[position].timeStamp.toString().asTime()
+                mListMessagesCache[position].timeStamp.toString().asTime()
         }
     }
 
@@ -57,9 +91,9 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         item: CommonModel,
         onSuccess: () -> Unit,
     ) {
-        if (!mlistMessagesCache.contains(item)) {
-            mlistMessagesCache.add(item)
-            notifyItemInserted(mlistMessagesCache.size)
+        if (!mListMessagesCache.contains(item)) {
+            mListMessagesCache.add(item)
+            notifyItemInserted(mListMessagesCache.size)
         }
         onSuccess()
     }
@@ -68,9 +102,9 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleChatHolde
         item: CommonModel,
         onSuccess: () -> Unit,
     ) {
-        if (!mlistMessagesCache.contains(item)) {
-            mlistMessagesCache.add(item)
-            mlistMessagesCache.sortBy { it.timeStamp.toString() }
+        if (!mListMessagesCache.contains(item)) {
+            mListMessagesCache.add(item)
+            mListMessagesCache.sortBy { it.timeStamp.toString() }
             notifyItemInserted(0)
         }
         onSuccess()

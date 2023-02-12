@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.ukrgram.R
+import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
 import com.example.ukrgram.ui.fragments.BaseFragment
@@ -73,6 +74,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
         chat_btn_attach.setOnClickListener { attachFile() }
 
+        // ---------------> AUDIO <---------------
         CoroutineScope(Dispatchers.IO).launch {
             chat_btn_voice.setOnTouchListener { view, motionEvent ->
                 if (checkPermission(RECORD_AUDIO)) {
@@ -88,7 +90,11 @@ class SingleChatFragment(private val contact: CommonModel) :
                         chat_input_message.setText("")
                         chat_btn_voice.colorFilter = null
                         mAppVoiceRecorder.stopRecord { file, messageKey ->
-                            uploadFileToStorage(Uri.fromFile(file), messageKey)
+                            uploadFileToStorage(Uri.fromFile(file),
+                                messageKey,
+                                contact.id,
+                                TYPE_MESSAGE_VOICE)
+                            mSmoothScrollToPosition = true
                         }
                     }
                 }
@@ -196,23 +202,16 @@ class SingleChatFragment(private val contact: CommonModel) :
         mToolbarInfo.toolbar_chat_status.text = mReceivingUser.state
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE
             && resultCode == AppCompatActivity.RESULT_OK && data != null
         ) {
             val uri = CropImage.getActivityResult(data).uri
-            val messagesKey = getMessageKey(contact.id)
-            val path = REF_STORAGE_ROOT
-                .child(FOLDER_MESSAGE_IMAGE)
-                .child(messagesKey)
-
-            putImageToStorage(uri, path) {
-                getUrlFromStorage(path) {
-                    sendMessageAsImage(contact.id, it, messagesKey)
-                    mSmoothScrollToPosition = true
-                }
-            }
+            val messageKey = getMessageKey(contact.id)
+            uploadFileToStorage(uri, messageKey, contact.id, TYPE_MESSAGE_IMAGE)
+            mSmoothScrollToPosition = true
         }
     }
 

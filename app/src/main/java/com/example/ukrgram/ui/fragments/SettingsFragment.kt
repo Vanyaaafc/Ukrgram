@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ukrgram.R
+import com.example.ukrgram.database.*
 import com.example.ukrgram.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -51,7 +52,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
 
-            putImageToStorage(uri, path) {
+            putFileToStorage(uri, path) {
                 getUrlFromStorage(path) {
                     putUrlToDatabase(it) {
                         (mRootView.findViewById<ImageView>(R.id.settings_user_photo))

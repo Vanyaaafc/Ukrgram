@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
+import com.example.ukrgram.database.updatePhonesToDataBase
 import com.example.ukrgram.models.CommonModel
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat

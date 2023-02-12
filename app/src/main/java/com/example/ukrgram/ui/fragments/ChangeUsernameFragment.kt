@@ -2,6 +2,7 @@ package com.example.ukrgram.ui.fragments
 
 import android.widget.TextView
 import com.example.ukrgram.R
+import com.example.ukrgram.database.*
 import com.example.ukrgram.utilits.*
 import java.util.*
 

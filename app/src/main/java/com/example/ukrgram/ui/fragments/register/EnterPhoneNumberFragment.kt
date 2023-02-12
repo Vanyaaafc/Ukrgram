@@ -2,8 +2,8 @@ package com.example.ukrgram.ui.fragments.register
 
 import android.view.View
 import android.widget.EditText
-import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
+import com.example.ukrgram.database.AUTH
 import com.example.ukrgram.ui.fragments.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.google.firebase.FirebaseException

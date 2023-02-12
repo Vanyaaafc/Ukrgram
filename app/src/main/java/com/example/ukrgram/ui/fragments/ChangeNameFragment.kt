@@ -1,7 +1,8 @@
 package com.example.ukrgram.ui.fragments
 
-import android.widget.EditText
 import com.example.ukrgram.R
+import com.example.ukrgram.database.USER
+import com.example.ukrgram.database.setNameToDatabase
 import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_name.*
 

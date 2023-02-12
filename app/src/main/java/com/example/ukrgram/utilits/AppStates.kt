@@ -1,5 +1,7 @@
 package com.example.ukrgram.utilits
 
+import com.example.ukrgram.database.*
+
 enum class AppStates(val state: String) {
     ONLINE("в сети"),
     OFFLINE("был(а) недавно"),

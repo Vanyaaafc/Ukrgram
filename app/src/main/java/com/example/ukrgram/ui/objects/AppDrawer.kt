@@ -4,14 +4,12 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ukrgram.R
 import com.example.ukrgram.ui.fragments.ContactsFragment
 import com.example.ukrgram.ui.fragments.SettingsFragment
 import com.example.ukrgram.utilits.APP_ACTIVITY
-import com.example.ukrgram.utilits.USER
+import com.example.ukrgram.database.USER
 import com.example.ukrgram.utilits.downloadAndSetImage
 import com.example.ukrgram.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader

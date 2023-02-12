@@ -1,8 +1,8 @@
 package com.example.ukrgram.ui.fragments.register
 
 import android.widget.EditText
-import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
+import com.example.ukrgram.database.*
 import com.example.ukrgram.ui.fragments.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.PhoneAuthCredential

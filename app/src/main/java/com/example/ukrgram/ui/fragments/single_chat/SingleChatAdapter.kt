@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
+import com.example.ukrgram.database.CURRENT_UID
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.message_item.view.*

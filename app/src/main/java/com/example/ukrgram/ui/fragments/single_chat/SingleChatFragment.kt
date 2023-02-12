@@ -2,10 +2,10 @@ package com.example.ukrgram.ui.fragments.single_chat
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.view.MotionEvent
 import android.view.View
 import android.widget.AbsListView
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -17,12 +17,8 @@ import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
 import com.example.ukrgram.ui.fragments.BaseFragment
 import com.example.ukrgram.utilits.*
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.fragment_single_chat.*
 import kotlinx.android.synthetic.main.toolbar_info.view.*
@@ -48,6 +44,7 @@ class SingleChatFragment(private val contact: CommonModel) :
     private var mSmoothScrollToPosition = true
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mLayoutManager: LinearLayoutManager
+    private lateinit var mAppVoiceRecorder: AppVoiceRecorder
 
     override fun onResume() {
         super.onResume()
@@ -58,6 +55,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initFields() {
+        mAppVoiceRecorder = AppVoiceRecorder()
         mSwipeRefreshLayout = chat_swipe_refresh
         mLayoutManager = LinearLayoutManager(this.context)
         chat_input_message.addTextChangedListener {
@@ -81,17 +79,24 @@ class SingleChatFragment(private val contact: CommonModel) :
                     if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                         //TODO record
                         chat_input_message.setText("Запись")
-                        chat_btn_voice.setColorFilter(ContextCompat.getColor(APP_ACTIVITY, R.color.colorPrimary))
+                        chat_btn_voice.setColorFilter(ContextCompat.getColor(APP_ACTIVITY,
+                            R.color.colorPrimary))
+                        val messageKey = getMessageKey(contact.id)
+                        mAppVoiceRecorder.startRecord(messageKey)
                     } else if (motionEvent.action == MotionEvent.ACTION_UP) {
                         //TODO stop record
                         chat_input_message.setText("")
                         chat_btn_voice.colorFilter = null
+                        mAppVoiceRecorder.stopRecord { file, messageKey ->
+                            uploadFileToStorage(Uri.fromFile(file), messageKey)
+                        }
                     }
                 }
                 true
             }
         }
     }
+
 
     private fun attachFile() {
         CropImage.activity()
@@ -197,9 +202,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             && resultCode == AppCompatActivity.RESULT_OK && data != null
         ) {
             val uri = CropImage.getActivityResult(data).uri
-            val messagesKey =
-                REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID).child(contact.id)
-                    .push().key.toString()
+            val messagesKey = getMessageKey(contact.id)
             val path = REF_STORAGE_ROOT
                 .child(FOLDER_MESSAGE_IMAGE)
                 .child(messagesKey)
@@ -219,6 +222,10 @@ class SingleChatFragment(private val contact: CommonModel) :
         APP_ACTIVITY.mToolbar.toolbar_info.visibility = View.GONE
         mRefUser.removeEventListener(mListenerInfoToolbar)
         mRefMessages.removeEventListener(mMessagesListener)
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mAppVoiceRecorder.releaseRecorder()
     }
 }

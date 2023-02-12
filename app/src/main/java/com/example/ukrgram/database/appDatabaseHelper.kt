@@ -1,8 +1,6 @@
 package com.example.ukrgram.utilits
 
-import android.annotation.SuppressLint
 import android.net.Uri
-import android.provider.ContactsContract
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
@@ -42,7 +40,7 @@ const val CHILD_TEXT = "text"
 const val CHILD_TYPE = "type"
 const val CHILD_FROM = "from"
 const val CHILD_TIMESTAMP = "timeStamp"
-const val CHILD_IMAGE_URL = "imageUrl"
+const val CHILD_FILE_URL = "fileUrl"
 
 fun initFirebase() {
     AUTH = FirebaseAuth.getInstance()
@@ -195,7 +193,7 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
     mapMessage[CHILD_TYPE] = TYPE_MESSAGE_IMAGE
     mapMessage[CHILD_ID] = messageKey
     mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
-    mapMessage[CHILD_IMAGE_URL] = imageUrl
+    mapMessage[CHILD_FILE_URL] = imageUrl
 
     val mapDialog = hashMapOf<String, Any>()
     mapDialog["$refDialogUser/$messageKey"] = mapMessage
@@ -204,4 +202,12 @@ fun sendMessageAsImage(receivingUserID: String, imageUrl: String, messageKey: St
     REF_DATABASE_ROOT
         .updateChildren(mapDialog)
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun getMessageKey(id: String) =
+    REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID).child(id)
+        .push().key.toString()
+
+fun uploadFileToStorage(uri: Uri, messageKey: String) {
+    showToast("Record OK")
 }

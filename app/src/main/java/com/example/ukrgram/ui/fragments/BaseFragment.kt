@@ -30,13 +30,4 @@ open class BaseFragment(private val layuot: Int) : Fragment(layuot) {
             return
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        try {
-            APP_ACTIVITY.mAppDrawer.enableDrawer()
-        } catch (e: Exception) {
-            return
-        }
-    }
 }

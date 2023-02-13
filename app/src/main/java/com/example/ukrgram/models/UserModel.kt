@@ -1,11 +1,11 @@
 package com.example.ukrgram.models
 
-data class User(
+data class UserModel(
     val id: String = "",
     var username: String = "",
     var bio: String = "",
     var fullname: String = "",
-    var status: String = "",
+    var state: String = "",
     var phone: String = "",
-    var photoUrl: String = ""
+    var photoUrl: String = "empty"
 )

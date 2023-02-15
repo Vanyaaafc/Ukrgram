@@ -12,7 +12,9 @@
     <color name="colorPrimaryDark">#006AFF</color>
     <color name="colorGrey">#616161</color>
     <color name="colorGreen">#9FE856</color>
+    <color name="colorGreenDark">#408000</color>
     <color name="colorBlueWish">#8FEEFA</color>
+    <color name="colorGreen_bg_user">#8CEC64</color>
 
 
 

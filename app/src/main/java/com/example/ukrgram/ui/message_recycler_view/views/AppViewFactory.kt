@@ -1,4 +1,4 @@
-package com.example.ukrgram.ui.fragments.message_recycler_view.views
+package com.example.ukrgram.ui.message_recycler_view.views
 
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.utilits.TYPE_MESSAGE_IMAGE

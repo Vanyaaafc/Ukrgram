@@ -59,7 +59,7 @@ fun ImageView.downloadAndSetImage(url: String) {
 @SuppressLint("Range")
 fun initContacts() {
     if (checkPermission(READ_CONTACTS)) {
-        var arrayContacts = arrayListOf<CommonModel>()
+        val arrayContacts = arrayListOf<CommonModel>()
         val cursor = APP_ACTIVITY.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             null,

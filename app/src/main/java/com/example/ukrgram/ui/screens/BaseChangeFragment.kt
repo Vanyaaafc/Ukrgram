@@ -1,4 +1,4 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.screens
 
 import android.os.Bundle
 import android.view.*

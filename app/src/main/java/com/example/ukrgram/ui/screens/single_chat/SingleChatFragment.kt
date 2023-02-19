@@ -1,4 +1,4 @@
-package com.example.ukrgram.ui.fragments.single_chat
+package com.example.ukrgram.ui.screens.single_chat
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -16,8 +16,8 @@ import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
-import com.example.ukrgram.ui.fragments.BaseFragment
-import com.example.ukrgram.ui.fragments.message_recycler_view.views.AppViewFactory
+import com.example.ukrgram.ui.screens.BaseFragment
+import com.example.ukrgram.ui.message_recycler_view.views.AppViewFactory
 import com.example.ukrgram.utilits.*
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
@@ -222,10 +222,12 @@ class SingleChatFragment(private val contact: CommonModel) :
         APP_ACTIVITY.mToolbar.toolbar_info.visibility = View.GONE
         mRefUser.removeEventListener(mListenerInfoToolbar)
         mRefMessages.removeEventListener(mMessagesListener)
+        hideKeyboard()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mAppVoiceRecorder.releaseRecorder()
+        mAdapter.onDestroy()
     }
 }

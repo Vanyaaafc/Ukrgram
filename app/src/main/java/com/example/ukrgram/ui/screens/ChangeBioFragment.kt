@@ -1,10 +1,9 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.screens
 
 import android.widget.TextView
 import com.example.ukrgram.R
 import com.example.ukrgram.database.USER
 import com.example.ukrgram.database.setBioToDatabase
-import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_bio.*
 
 class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {

@@ -9,8 +9,8 @@ import com.example.ukrgram.database.AUTH
 import com.example.ukrgram.database.initFirebase
 import com.example.ukrgram.database.initUser
 import com.example.ukrgram.databinding.ActivityMainBinding
-import com.example.ukrgram.ui.fragments.MainFragment
-import com.example.ukrgram.ui.fragments.register.EnterPhoneNumberFragment
+import com.example.ukrgram.ui.screens.MainFragment
+import com.example.ukrgram.ui.screens.register.EnterPhoneNumberFragment
 import com.example.ukrgram.ui.objects.AppDrawer
 import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.FirebaseAuth

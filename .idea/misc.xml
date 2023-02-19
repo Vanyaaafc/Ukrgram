@@ -11,8 +11,10 @@
         <entry key="app/src/main/res/drawable/ic_btn_action_menu.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_change_name.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_exit.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/ic_play_blue.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/ic_play_green.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.237" />
+        <entry key="app/src/main/res/drawable/ic_stop_blue.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/ic_stop_green.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_voice.xml" value="0.23" />
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.146" />

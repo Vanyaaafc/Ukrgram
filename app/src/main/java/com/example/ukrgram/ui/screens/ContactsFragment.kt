@@ -1,4 +1,4 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.screens
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
-import com.example.ukrgram.ui.fragments.single_chat.SingleChatFragment
+import com.example.ukrgram.ui.screens.single_chat.SingleChatFragment
 import com.example.ukrgram.utilits.*
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions

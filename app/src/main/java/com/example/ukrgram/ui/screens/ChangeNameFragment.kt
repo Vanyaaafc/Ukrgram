@@ -1,4 +1,4 @@
-package com.example.ukrgram.ui.fragments
+package com.example.ukrgram.ui.screens
 
 import com.example.ukrgram.R
 import com.example.ukrgram.database.USER

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_file_blue.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/bg_receiving_message.xml" value="0.237" />
         <entry key="app/src/main/res/drawable/bg_user_message.xml" value="0.237" />
         <entry key="app/src/main/res/drawable/header.xml" value="0.2435" />
@@ -11,6 +12,7 @@
         <entry key="app/src/main/res/drawable/ic_btn_action_menu.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_change_name.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_exit.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/ic_file_green.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_play_blue.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/ic_play_green.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.237" />
@@ -33,6 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2676620483398438" />
         <entry key="app/src/main/res/layout/fragment_single_chat.xml" value="0.29655338909132367" />
         <entry key="app/src/main/res/layout/message_item.xml" value="0.2740397135416667" />
+        <entry key="app/src/main/res/layout/message_item_file.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/message_item_image.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/message_item_text.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/message_item_voice.xml" value="0.34364913719287815" />

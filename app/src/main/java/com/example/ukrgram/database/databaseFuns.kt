@@ -210,8 +210,8 @@ fun getFileFromStorage(mFile: File, fileUrl: String, function: () -> Unit) {
 }
 
 fun saveToMainList(id: String, type: String) {
-    val refUser = "$NODE_MAIN_LIST/$CURRENT_UID/$id/$CHILD_TIMESTAMP"
-    val refReceived = "$NODE_MAIN_LIST/$id/$CURRENT_UID/$CHILD_TIMESTAMP"
+    val refUser = "$NODE_MAIN_LIST/$CURRENT_UID/$id"
+    val refReceived = "$NODE_MAIN_LIST/$id/$CURRENT_UID"
 
     val mapUser = hashMapOf<String, Any>()
     val mapReceived = hashMapOf<String, Any>()

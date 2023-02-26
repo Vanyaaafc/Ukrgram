@@ -203,10 +203,13 @@ class SingleChatFragment(private val contact: CommonModel) :
             if (message.isEmpty()) {
                 showToast("Введите сообщение")
             } else sendMessage(message, contact.id, TYPE_TEXT) {
+                saveToMainList(contact.id, TYPE_CHAT)
                 chat_input_message.setText("")
             }
         }
     }
+
+
 
 
     private fun initInfoToolbar() {

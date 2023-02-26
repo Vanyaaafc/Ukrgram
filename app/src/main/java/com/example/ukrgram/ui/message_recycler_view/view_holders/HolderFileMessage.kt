@@ -70,9 +70,9 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
         )
 
         try {
-            if (checkPermission(WRITE_FILES)){
+            if (checkPermission(WRITE_FILES)) {
                 file.createNewFile()
-                getFileFromStorage(file, view.fileUrl){
+                getFileFromStorage(file, view.fileUrl) {
                     if (view.from == CURRENT_UID) {
                         chatUserBtnDownload.visibility = View.VISIBLE
                         chatUserProgressBar.visibility = View.INVISIBLE
@@ -82,7 +82,7 @@ class HolderFileMessage(view: View) : RecyclerView.ViewHolder(view), MessageHold
                     }
                 }
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             showToast(e.message.toString())
         }
     }

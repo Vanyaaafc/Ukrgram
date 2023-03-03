@@ -55,7 +55,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             putFileToStorage(uri, path) {
                 getUrlFromStorage(path) {
                     putUrlToDatabase(it) {
-                        (mRootView.findViewById<ImageView>(R.id.settings_user_photo))
+                        settings_user_photo
                         showToast(getString(R.string.toast_data_update))
                         USER.photoUrl = it
                         APP_ACTIVITY.mAppDrawer.updateHeader()

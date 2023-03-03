@@ -3,7 +3,7 @@ package com.example.ukrgram.ui.screens
 import com.example.ukrgram.R
 import com.example.ukrgram.database.USER
 import com.example.ukrgram.database.setNameToDatabase
-import com.example.ukrgram.utilits.*
+import com.example.ukrgram.utilits.showToast
 import kotlinx.android.synthetic.main.fragment_change_name.*
 
 

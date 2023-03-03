@@ -10,7 +10,7 @@ class ChangeBioFragment : BaseChangeFragment(R.layout.fragment_change_bio) {
 
     override fun onResume() {
         super.onResume()
-        mRootView.findViewById<TextView>(R.id.settings_input_bio).setText(USER.bio)
+        mRootView.findViewById<TextView>(R.id.settings_input_bio).text = USER.bio
     }
 
     override fun change() {

@@ -9,6 +9,7 @@ import com.example.ukrgram.utilits.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.android.synthetic.main.fragment_enter_phone_number.*
 import java.util.concurrent.TimeUnit
 
 
@@ -40,11 +41,11 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
             }
 
         }
-        mRootView.findViewById<View>(R.id.register_btn_next).setOnClickListener { sendCode() }
+        register_btn_next.setOnClickListener { sendCode() }
     }
 
     private fun sendCode() {
-        if (mRootView.findViewById<EditText>(R.id.register_input_phone_number).text.isEmpty()) {
+        if (register_input_phone_number.text.isEmpty()) {
             showToast(getString(R.string.register_toast_enter_phone))
         } else {
 //            replaceFragment(EnterCodeFragment())
@@ -54,7 +55,7 @@ class EnterPhoneNumberFragment : BaseFragment(R.layout.fragment_enter_phone_numb
 
     private fun authUser() {
         mPhoneNumber =
-            mRootView.findViewById<EditText>(R.id.register_input_phone_number).text.toString()
+            register_input_phone_number.text.toString()
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
             mPhoneNumber,
             60,

@@ -4,6 +4,7 @@ import android.widget.TextView
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.utilits.*
+import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*
 
 class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_username) {
@@ -12,14 +13,12 @@ class ChangeUsernameFragment : BaseChangeFragment(R.layout.fragment_change_usern
 
     override fun onResume() {
         super.onResume()
-        mRootView.findViewById<TextView>(R.id.settings_input_username).setText(USER.username)
+        settings_input_username.setText(USER.username)
     }
 
 
     override fun change() {
-        mNewUsername =
-            mRootView.findViewById<TextView>(R.id.settings_input_username).text.toString()
-                .lowercase(Locale.getDefault())
+        mNewUsername = settings_input_username.text.toString().lowercase(Locale.getDefault())
         if (mNewUsername.isEmpty()) {
             showToast("Поле пустое")
         } else {

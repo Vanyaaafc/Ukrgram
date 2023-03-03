@@ -19,7 +19,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
         APP_ACTIVITY.title = phoneNumber
         register_input_code.addTextChangedListener(AppTextWatcher {
             val string =
-                mRootView.findViewById<EditText>(R.id.register_input_code).text.toString()
+                register_input_code.text.toString()
             if (string.length == 6) {
                 enterCode()
             }

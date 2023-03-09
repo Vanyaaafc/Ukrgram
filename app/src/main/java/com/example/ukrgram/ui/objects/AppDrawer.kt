@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.ukrgram.R
 import com.example.ukrgram.ui.screens.ContactsFragment
-import com.example.ukrgram.ui.screens.SettingsFragment
+import com.example.ukrgram.ui.screens.settings.SettingsFragment
 import com.example.ukrgram.utilits.APP_ACTIVITY
 import com.example.ukrgram.database.USER
 import com.example.ukrgram.utilits.downloadAndSetImage

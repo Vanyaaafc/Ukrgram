@@ -7,13 +7,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
+import com.example.ukrgram.ui.screens.single_chat.SingleChatAdapter
+import com.example.ukrgram.ui.screens.single_chat.SingleChatFragment
 import com.example.ukrgram.utilits.downloadAndSetImage
+import com.example.ukrgram.utilits.replaceFragment
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.main_list_item.view.*
 
 class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>() {
 
-    val listItems = mutableListOf<CommonModel>()
+    private val listItems = mutableListOf<CommonModel>()
 
     class MainListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemName: TextView = view.main_list_item_name
@@ -24,7 +27,12 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainListViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.main_list_item, parent, false)
-        return MainListViewHolder(view)
+
+        val holder = MainListViewHolder(view)
+        holder.itemView.setOnClickListener {
+            replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
+        }
+        return holder
     }
 
     override fun onBindViewHolder(holder: MainListViewHolder, position: Int) {

@@ -1,13 +1,13 @@
-package com.example.ukrgram.ui.screens
+package com.example.ukrgram.ui.screens.settings
 
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
+import com.example.ukrgram.ui.screens.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

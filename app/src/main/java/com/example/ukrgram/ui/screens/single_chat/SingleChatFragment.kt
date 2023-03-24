@@ -17,6 +17,7 @@ import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
 import com.example.ukrgram.ui.screens.BaseFragment
 import com.example.ukrgram.ui.message_recycler_view.views.AppViewFactory
+import com.example.ukrgram.ui.screens.main_list.MainListFragment
 import com.example.ukrgram.ui.screens.settings.ChangeNameFragment
 import com.example.ukrgram.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -266,9 +267,18 @@ class SingleChatFragment(private val contact: CommonModel) :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //слушатель выбора пунктов выпадающего меню
         when (item.itemId) {
-
+            R.id.menu_clear_chat -> clearChat(contact.id) {
+                showToast("Чат очищен")
+                replaceFragment(MainListFragment())
+            }
+            R.id.menu_delete_chat -> deleteChat(contact.id) {
+                showToast("Чат удален")
+                replaceFragment(MainListFragment())
+            }
         }
         return true
     }
+
 }

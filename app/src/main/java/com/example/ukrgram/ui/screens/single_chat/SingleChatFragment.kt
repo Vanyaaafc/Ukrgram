@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.view.*
 import android.widget.AbsListView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,10 +14,9 @@ import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
-import com.example.ukrgram.ui.screens.BaseFragment
+import com.example.ukrgram.ui.screens.base.BaseFragment
 import com.example.ukrgram.ui.message_recycler_view.views.AppViewFactory
 import com.example.ukrgram.ui.screens.main_list.MainListFragment
-import com.example.ukrgram.ui.screens.settings.ChangeNameFragment
 import com.example.ukrgram.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference

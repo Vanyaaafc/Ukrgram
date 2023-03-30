@@ -2,7 +2,7 @@ package com.example.ukrgram.ui.screens.settings
 
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
-import com.example.ukrgram.ui.screens.BaseChangeFragment
+import com.example.ukrgram.ui.screens.base.BaseChangeFragment
 import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_change_username.*
 import java.util.*

@@ -1,10 +1,8 @@
 package com.example.ukrgram.ui.screens.register
 
-import android.view.View
-import android.widget.EditText
 import com.example.ukrgram.R
 import com.example.ukrgram.database.AUTH
-import com.example.ukrgram.ui.screens.BaseFragment
+import com.example.ukrgram.ui.screens.base.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential

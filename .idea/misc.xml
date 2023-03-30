@@ -22,9 +22,11 @@
         <entry key="app/src/main/res/drawable/ripple_effect.xml" value="0.146" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/add_contacts_item.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/bg_user_message.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/choice_upload.xml" value="0.2441123188405797" />
         <entry key="app/src/main/res/layout/contact_item.xml" value="0.2583460489908854" />
+        <entry key="app/src/main/res/layout/fragment_add_contacts.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/fragment_change_bio.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_change_name.xml" value="0.33618991133095566" />
         <entry key="app/src/main/res/layout/fragment_change_username.xml" value="0.19610507246376813" />

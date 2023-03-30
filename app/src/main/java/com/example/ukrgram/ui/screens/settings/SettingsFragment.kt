@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
-import com.example.ukrgram.ui.screens.BaseFragment
+import com.example.ukrgram.ui.screens.base.BaseFragment
 import com.example.ukrgram.utilits.*
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

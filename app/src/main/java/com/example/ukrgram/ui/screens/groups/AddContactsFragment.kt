@@ -1,19 +1,15 @@
 package com.example.ukrgram.ui.screens.groups
 
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
-import com.example.ukrgram.utilits.APP_ACTIVITY
-import com.example.ukrgram.utilits.AppValueEventListener
-import com.example.ukrgram.utilits.hideKeyboard
-import com.example.ukrgram.utilits.replaceFragment
+import com.example.ukrgram.ui.screens.base.BaseFragment
+import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
-import kotlinx.android.synthetic.main.fragment_main_list.*
 
 
-class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
+class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: AddContactsAdapter
@@ -24,13 +20,17 @@ class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
 
 
     override fun onResume() {
+        listContacts.clear()
         super.onResume()
         APP_ACTIVITY.title = "Добавить участника"
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            replaceFragment(CreateGroupFragment(listContacts))
+            if (listContacts.isEmpty()) {
+                showToast("Добавьте участников группы")
+            } else {
+                replaceFragment(CreateGroupFragment(listContacts))
+            }
         }
     }
 

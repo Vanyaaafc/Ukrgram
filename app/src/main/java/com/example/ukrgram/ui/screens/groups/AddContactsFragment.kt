@@ -8,6 +8,7 @@ import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.utilits.APP_ACTIVITY
 import com.example.ukrgram.utilits.AppValueEventListener
 import com.example.ukrgram.utilits.hideKeyboard
+import com.example.ukrgram.utilits.replaceFragment
 import kotlinx.android.synthetic.main.fragment_add_contacts.*
 import kotlinx.android.synthetic.main.fragment_main_list.*
 
@@ -29,11 +30,10 @@ class AddContactsFragment : Fragment(R.layout.fragment_add_contacts) {
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {
-            listContacts.forEach {
-                println(it.id)
-            }
+            replaceFragment(CreateGroupFragment(listContacts))
         }
     }
+
 
     private fun initRecyclerView() {
         mRecyclerView = add_contacts_recycle_view

@@ -5,6 +5,7 @@ import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.ui.screens.base.BaseFragment
 import com.example.ukrgram.utilits.APP_ACTIVITY
+import com.example.ukrgram.utilits.getPlurals
 import com.example.ukrgram.utilits.hideKeyboard
 import com.example.ukrgram.utilits.showToast
 import kotlinx.android.synthetic.main.fragment_create_group.*
@@ -18,13 +19,13 @@ class CreateGroupFragment(var listContacts: List<CommonModel>) : BaseFragment(R.
     override fun onResume() {
         super.onResume()
         APP_ACTIVITY.title = "Создать группу"
-        APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
         initRecyclerView()
         create_group_btn_complete.setOnClickListener {
             showToast("Click")
         }
         create_group_input_name.requestFocus()
+        create_group_counts.text = getPlurals(listContacts.size)
     }
 
 

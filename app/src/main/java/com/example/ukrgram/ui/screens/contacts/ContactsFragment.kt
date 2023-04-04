@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.contact_item.*
 import kotlinx.android.synthetic.main.contact_item.view.*
 import kotlinx.android.synthetic.main.fragment_contacts.*
 
@@ -28,10 +29,9 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
     private lateinit var mRefUsersListener: AppValueEventListener
     private var mapListeners = hashMapOf<DatabaseReference, AppValueEventListener>()
 
-
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Контакты"
+        APP_ACTIVITY.title = getString(R.string.toolbar_contacts)
         initRecycleView()
     }
 
@@ -67,6 +67,11 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                     } else holder.name.text = contact.fullname
 
                     holder.status.text = contact.state
+                    if (contact.state == AppStates.ONLINE.state) {
+                        holder.contactOnline.visibility = View.VISIBLE
+                    } else if (contact.state == AppStates.OFFLINE.state) {
+                        holder.contactOnline.visibility = View.INVISIBLE
+                    }
                     holder.photo.downloadAndSetImage(contact.photoUrl)
                     holder.itemView.setOnClickListener { replaceFragment(SingleChatFragment(model)) }
                 }
@@ -90,10 +95,12 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
         }
     }
 
+
     class ContactsHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.toolbar_chat_fullname
         val status: TextView = view.toolbar_chat_status
         val photo: CircleImageView = view.contact_photo
+        val contactOnline: CircleImageView = view.contact_online
     }
 }
 

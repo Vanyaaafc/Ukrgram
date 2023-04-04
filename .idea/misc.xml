@@ -13,6 +13,8 @@
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_change_name.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_action_menu_exit.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_btn_next.xml" value="0.2445" />
+        <entry key="app/src/main/res/drawable/ic_choice.xml" value="0.1535" />
+        <entry key="app/src/main/res/drawable/ic_done.xml" value="0.1535" />
         <entry key="app/src/main/res/drawable/ic_file_green.xml" value="0.2445" />
         <entry key="app/src/main/res/drawable/ic_play_blue.xml" value="0.257" />
         <entry key="app/src/main/res/drawable/ic_play_green.xml" value="0.1635" />
@@ -26,7 +28,7 @@
         <entry key="app/src/main/res/layout/add_contacts_item.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/bg_user_message.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/choice_upload.xml" value="0.2441123188405797" />
-        <entry key="app/src/main/res/layout/contact_item.xml" value="0.2583460489908854" />
+        <entry key="app/src/main/res/layout/contact_item.xml" value="0.37110544840494797" />
         <entry key="app/src/main/res/layout/fragment_add_contacts.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/fragment_change_bio.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_change_name.xml" value="0.33618991133095566" />
@@ -46,7 +48,7 @@
         <entry key="app/src/main/res/layout/message_item_image.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/message_item_text.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/message_item_voice.xml" value="0.34364913719287815" />
-        <entry key="app/src/main/res/layout/toolbar_info.xml" value="0.4871042887369792" />
+        <entry key="app/src/main/res/layout/toolbar_info.xml" value="0.33627726236979166" />
         <entry key="app/src/main/res/menu/settings_action_menu.xml" value="0.2884078979492188" />
         <entry key="app/src/main/res/menu/settings_action_menu_name.xml" value="0.29791666666666666" />
         <entry key="app/src/main/res/menu/settings_menu_confirm.xml" value="0.2797053019205729" />

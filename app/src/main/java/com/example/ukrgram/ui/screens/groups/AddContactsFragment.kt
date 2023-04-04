@@ -22,7 +22,7 @@ class AddContactsFragment : BaseFragment(R.layout.fragment_add_contacts) {
     override fun onResume() {
         listContacts.clear()
         super.onResume()
-        APP_ACTIVITY.title = "Добавить участника"
+        APP_ACTIVITY.title = getString(R.string.toolbar_add_participant)
         hideKeyboard()
         initRecyclerView()
         add_contacts_btn_next.setOnClickListener {

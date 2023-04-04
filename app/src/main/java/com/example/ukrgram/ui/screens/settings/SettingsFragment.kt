@@ -20,6 +20,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     override fun onResume() {
         super.onResume()
         setHasOptionsMenu(true)
+        APP_ACTIVITY.title = getString(R.string.toolbar_settings)
         initFields()
     }
 

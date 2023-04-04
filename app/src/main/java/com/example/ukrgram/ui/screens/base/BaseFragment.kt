@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ukrgram.utilits.APP_ACTIVITY
+import kotlinx.android.synthetic.main.contact_item.*
 import java.lang.Exception
 
 

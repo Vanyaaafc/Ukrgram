@@ -1,11 +1,15 @@
 package com.example.ukrgram.utilits
 
+import com.example.ukrgram.R
 import com.example.ukrgram.database.*
+import com.example.ukrgram.ui.screens.base.BaseFragment
+import kotlinx.android.synthetic.main.contact_item.*
 
 enum class AppStates(val state: String) {
-    ONLINE("в сети"),
-    OFFLINE("был(а) недавно"),
+    ONLINE(APP_ACTIVITY.getString(R.string.online_state_string)),
+    OFFLINE(APP_ACTIVITY.getString(R.string.offline_state_string)),
     TYPING("печатает");
+
 
     companion object {
         fun updateState(appStates: AppStates) {

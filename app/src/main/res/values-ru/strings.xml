@@ -28,6 +28,36 @@
     <string name="settings_hint_input_username">username</string>
     <string name="settings_hint_input_bio">bio</string>
     <string name="delete_chat">Удалить чат</string>
+    <string name="online_state_string">в сети</string>
+    <string name="offline_state_string">был(а) недавно</string>
+    <string name="hint_message">Сообщение…</string>
+
+
+    <!-- MENU -->
+    <string name="menu_create_group">Создать группу</string>
+    <string name="menu_create_secret_chat">Создать секретный чат</string>
+    <string name="menu_create_channel">Создать канал</string>
+    <string name="menu_contacts">Контакты</string>
+    <string name="menu_calls">Звонки</string>
+    <string name="menu_favorites">Избранное</string>
+    <string name="Settings">Настройки</string>
+    <string name="menu_invite_friends">Пригласить друзей</string>
+    <string name="menu_questions">Вопросы о Ukrgram</string>
+
+    <!-- MENU -->
+
+    <!-- TOOLBAR -->
+
+    <string name="toolbar_add_participant">Добавить участника</string>
+    <string name="toolbar_settings">Настройки</string>
+    <string name="toolbar_contacts">Контакты</string>
+    <string name="toolbar_create_group">Создать группу</string>
+
+
+    <!-- TOOLBAR -->
+
+
+
 
     <plurals name="count_members">
         <item quantity="one">%d участник</item>

@@ -16,6 +16,15 @@
         android:src="@drawable/default_photo"
         app:civ_circle_background_color="#FFFFFF" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/contact_online"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:src="@drawable/ic_online"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_chat_image"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar_chat_image"/>
+
     <TextView
         android:id="@+id/toolbar_chat_fullname"
         style="@style/normalText"
@@ -28,7 +37,7 @@
     <TextView
         android:id="@+id/toolbar_chat_status"
         style="@style/smallText"
-        tools:text="в сети"
+        tools:text="@string/settings_default_status"
         android:layout_marginStart="@dimen/vertical_margin"
         android:textColor="@color/whiteDark"
         app:layout_constraintStart_toEndOf="@id/toolbar_chat_image"

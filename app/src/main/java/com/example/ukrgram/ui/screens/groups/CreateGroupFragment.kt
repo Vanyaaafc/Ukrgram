@@ -18,7 +18,7 @@ class CreateGroupFragment(var listContacts: List<CommonModel>) : BaseFragment(R.
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Создать группу"
+        APP_ACTIVITY.title = getString(R.string.toolbar_create_group)
         hideKeyboard()
         initRecyclerView()
         create_group_btn_complete.setOnClickListener {

@@ -9,15 +9,12 @@ import android.provider.OpenableColumns
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.ukrgram.MainActivity
 import com.example.ukrgram.R
 import com.example.ukrgram.database.updatePhonesToDataBase
 import com.example.ukrgram.models.CommonModel
 import com.squareup.picasso.Picasso
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -111,3 +108,5 @@ fun getFilenameFromUri(uri: Uri): String {
 
 fun getPlurals(count: Int) =
     APP_ACTIVITY.resources.getQuantityString(R.plurals.count_members, count, count)
+
+

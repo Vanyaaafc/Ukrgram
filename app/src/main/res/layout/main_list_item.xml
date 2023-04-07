@@ -17,6 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/contact_online"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="2dp"
+
+        android:src="@drawable/ic_online"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/main_list_item_photo"
+        app:layout_constraintEnd_toEndOf="@+id/main_list_item_photo"/>
+
     <TextView
         android:id="@+id/main_list_item_name"
         style="@style/normalText"

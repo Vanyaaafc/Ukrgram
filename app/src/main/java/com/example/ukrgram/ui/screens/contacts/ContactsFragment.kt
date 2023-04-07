@@ -66,6 +66,7 @@ class ContactsFragment : BaseFragment(R.layout.fragment_contacts) {
                         holder.name.text = model.fullname
                     } else holder.name.text = contact.fullname
 
+
                     holder.status.text = contact.state
                     if (contact.state == AppStates.ONLINE.state) {
                         holder.contactOnline.visibility = View.VISIBLE

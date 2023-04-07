@@ -56,7 +56,10 @@
 
     <!-- TOOLBAR -->
 
+    <!-- GROUP -->
+    <string name="name_group">Введите название группы</string>
 
+    <!-- GROUP -->
 
 
     <plurals name="count_members">

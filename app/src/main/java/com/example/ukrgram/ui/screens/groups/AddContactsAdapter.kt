@@ -19,7 +19,7 @@ class AddContactsAdapter : RecyclerView.Adapter<AddContactsAdapter.AddContactsHo
         val itemName: TextView = view.add_contacts_item_name
         val itemLastMessage: TextView = view.add_contacts_last_message
         val itemPhoto: CircleImageView = view.add_contacts_item_photo
-        val itemChoice: CircleImageView = view.add_contacts_item_choice
+        val itemChoice: CircleImageView = view. add_contacts_item_choice
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddContactsHolder {

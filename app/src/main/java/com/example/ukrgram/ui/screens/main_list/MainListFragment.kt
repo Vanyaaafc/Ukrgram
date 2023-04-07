@@ -29,6 +29,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
         initRecyclerView()
     }
 
+
     private fun initRecyclerView() {
         mRecyclerView = main_list_recycle_view
         mAdapter = MainListAdapter()

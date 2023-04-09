@@ -31,6 +31,11 @@
     <string name="online_state_string">online</string>
     <string name="offline_state_string">offline</string>
     <string name="hint_message">Message…</string>
+    <string name="enter_message">Enter the message</string>
+    <string name="user_already_taken">This user name is already taken</string>
+    <string name="field_empty">The field is empty</string>
+    <string name="chat_cleared">Chat cleared</string>
+    <string name="chat_delete">Chat delete</string>
 
     <!-- MENU -->
     <string name="menu_create_group">Create a group</string>
@@ -57,6 +62,8 @@
     <!-- TOOLBAR -->
     <!-- GROUP -->
     <string name="name_group">Enter a group name</string>
+
+
 
     <!-- GROUP -->
 

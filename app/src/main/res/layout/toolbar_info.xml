@@ -18,9 +18,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contact_online"
-        android:layout_width="12dp"
-        android:layout_height="12dp"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginEnd="2dp"
         android:src="@drawable/ic_online"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp"
         app:civ_circle_background_color="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_chat_image"
         app:layout_constraintEnd_toEndOf="@+id/toolbar_chat_image"/>

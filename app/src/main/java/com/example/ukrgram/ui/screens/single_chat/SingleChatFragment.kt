@@ -206,7 +206,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             mSmoothScrollToPosition = true
             val message = chat_input_message.text.toString()
             if (message.isEmpty()) {
-                showToast("Введите сообщение")
+                showToast(getString(R.string.enter_message))
             } else sendMessage(message, contact.id, TYPE_TEXT) {
                 saveToMainList(contact.id, TYPE_CHAT)
                 chat_input_message.setText("")
@@ -282,11 +282,11 @@ class SingleChatFragment(private val contact: CommonModel) :
         //слушатель выбора пунктов выпадающего меню
         when (item.itemId) {
             R.id.menu_clear_chat -> clearChat(contact.id) {
-                showToast("Чат очищен")
+                showToast(getString(R.string.chat_cleared))
                 replaceFragment(MainListFragment())
             }
             R.id.menu_delete_chat -> deleteChat(contact.id) {
-                showToast("Чат удален")
+                showToast(getString(R.string.chat_delete))
                 replaceFragment(MainListFragment())
             }
         }

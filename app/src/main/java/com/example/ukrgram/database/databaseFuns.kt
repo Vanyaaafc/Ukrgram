@@ -4,10 +4,7 @@ import android.net.Uri
 import com.example.ukrgram.R
 import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.models.UserModel
-import com.example.ukrgram.utilits.APP_ACTIVITY
-import com.example.ukrgram.utilits.AppValueEventListener
-import com.example.ukrgram.utilits.hideKeyboard
-import com.example.ukrgram.utilits.showToast
+import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
@@ -16,6 +13,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
 import java.util.ArrayList
+import java.util.HashMap
 
 
 fun initFirebase() {
@@ -262,6 +260,7 @@ fun createGroupToDatabase(
     val mapData = hashMapOf<String, Any>()
     mapData[CHILD_ID] = keyGroup
     mapData[CHILD_FULLNAME] = nameGroup
+    mapData[CHILD_PHOTO_URL] = "empty"
 
     val mapMembers = hashMapOf<String, Any>()
     listContacts.forEach {
@@ -273,14 +272,40 @@ fun createGroupToDatabase(
 
     path.updateChildren(mapData)
         .addOnSuccessListener {
-            function()
+
             if (uri != Uri.EMPTY) {
                 putFileToStorage(uri, pathStorage) {
                     getUrlFromStorage(pathStorage) {
-                        path.child(CHILD_FILE_URL).setValue(it)
+                        path.child(CHILD_PHOTO_URL ).setValue(it)
+                        addGroupsToMainList(mapData, listContacts){
+                            function()
+                        }
                     }
                 }
+            } else {
+                addGroupsToMainList(mapData, listContacts){
+                    function()
+                }
             }
+
         }
+        .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun addGroupsToMainList(
+    mapData: HashMap<String, Any>,
+    listContacts: List<CommonModel>,
+    function: () -> Unit,
+) {
+    val path = REF_DATABASE_ROOT.child(NODE_MAIN_LIST)
+    val map = hashMapOf<String, Any>()
+
+    map[CHILD_ID] = mapData[CHILD_ID].toString()
+    map[CHILD_TYPE] = TYPE_GROUP
+    listContacts.forEach {
+        path.child(it.id).child(map[CHILD_ID].toString()).updateChildren(map)
+    }
+    path.child(CURRENT_UID).child(map[CHILD_ID].toString()).updateChildren(map)
+        .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }

@@ -31,6 +31,11 @@
     <string name="online_state_string">в сети</string>
     <string name="offline_state_string">был(а) недавно</string>
     <string name="hint_message">Сообщение…</string>
+    <string name="enter_message">Введите сообщение</string>
+    <string name="user_already_taken">Такой пользователь уже существует</string>
+    <string name="field_empty">Поле пустое</string>
+    <string name="chat_cleared">Чат очищен</string>
+    <string name="chat_delete">Чат удален</string>
 
 
     <!-- MENU -->

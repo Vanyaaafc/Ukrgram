@@ -10,11 +10,9 @@ import com.example.ukrgram.database.NODE_USERS
 import com.example.ukrgram.database.REF_DATABASE_ROOT
 import com.example.ukrgram.database.getCommonModel
 import com.example.ukrgram.models.CommonModel
+import com.example.ukrgram.ui.screens.groups.GroupChatFragment
 import com.example.ukrgram.ui.screens.single_chat.SingleChatFragment
-import com.example.ukrgram.utilits.AppStates
-import com.example.ukrgram.utilits.AppValueEventListener
-import com.example.ukrgram.utilits.downloadAndSetImage
-import com.example.ukrgram.utilits.replaceFragment
+import com.example.ukrgram.utilits.*
 import com.google.firebase.database.DatabaseReference
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.contact_item.view.contact_online
@@ -40,7 +38,13 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
 
         val holder = MainListViewHolder(view)
         holder.itemView.setOnClickListener {
-            replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
+
+            when(listItems[holder.adapterPosition].type){
+                TYPE_CHAT -> replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
+                TYPE_GROUP -> replaceFragment(GroupChatFragment(listItems[holder.adapterPosition]))
+            }
+
+
         }
         return holder
     }

@@ -1,5 +1,6 @@
 package com.example.ukrgram.ui.screens.settings
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
@@ -73,14 +74,29 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.settings_menu_exit -> {
-                AppStates.updateState(AppStates.OFFLINE)
-                AUTH.signOut()
-                restartActivity()
+                val builder = AlertDialog.Builder(APP_ACTIVITY)
+                builder.setTitle("Выход из аккаунта")
+                builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
+                builder.setPositiveButton("Да") { _, _ ->
+
+                    AppStates.updateState(AppStates.OFFLINE)
+                    AUTH.signOut()
+                    restartActivity()
+                }
+                builder.setNegativeButton("Нет") { dialog, _ ->
+                    dialog.dismiss()
+                }
+
+                val dialog = builder.create()
+                dialog.show()
+                return true
             }
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
     }
 }
+

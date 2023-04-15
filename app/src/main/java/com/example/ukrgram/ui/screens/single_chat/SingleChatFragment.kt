@@ -217,10 +217,10 @@ class SingleChatFragment(private val contact: CommonModel) :
 
 
     private fun initInfoToolbar() {
-        when (mReceivingUser.state) {
-            AppStates.ONLINE.state -> mToolbarInfo.contact_online.visibility = View.VISIBLE
-            AppStates.OFFLINE.state -> mToolbarInfo.contact_online.visibility = View.INVISIBLE
-        }
+//        when (mReceivingUser.state) {
+//            AppStates.ONLINE.state -> mToolbarInfo.contact_online.visibility = View.VISIBLE
+//            AppStates.OFFLINE.state -> mToolbarInfo.contact_online.visibility = View.INVISIBLE
+//        }
         if (mReceivingUser.fullname.isEmpty()) {
             mToolbarInfo.toolbar_chat_fullname.text = contact.fullname
 

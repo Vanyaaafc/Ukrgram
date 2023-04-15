@@ -1,11 +1,10 @@
 package com.example.ukrgram.ui.screens.main_list
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
+import com.example.ukrgram.database.AUTH
 import com.example.ukrgram.database.NODE_USERS
 import com.example.ukrgram.database.REF_DATABASE_ROOT
 import com.example.ukrgram.database.getCommonModel
@@ -39,7 +38,7 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         val holder = MainListViewHolder(view)
         holder.itemView.setOnClickListener {
 
-            when(listItems[holder.adapterPosition].type){
+            when (listItems[holder.adapterPosition].type) {
                 TYPE_CHAT -> replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
                 TYPE_GROUP -> replaceFragment(GroupChatFragment(listItems[holder.adapterPosition]))
             }
@@ -54,10 +53,14 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         mRefUsersListener = AppValueEventListener {
             val contact = it.getCommonModel()
 
+
+
             when (contact.state) {
                 AppStates.ONLINE.state -> holder.contactOnline.visibility = View.VISIBLE
                 AppStates.OFFLINE.state -> holder.contactOnline.visibility = View.INVISIBLE
             }
+
+
 
             holder.itemName.text = listItems[position].fullname
             holder.itemLastMessage.text = listItems[position].lastMessage
@@ -74,4 +77,6 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         listItems.add(item)
         notifyItemInserted(listItems.size)
     }
+
+
 }

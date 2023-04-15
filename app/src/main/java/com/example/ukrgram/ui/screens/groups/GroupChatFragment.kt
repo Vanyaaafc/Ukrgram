@@ -216,10 +216,6 @@ class GroupChatFragment(private val group: CommonModel) :
 
 
     private fun initInfoToolbar() {
-        when (mReceivingUser.state) {
-            AppStates.ONLINE.state -> mToolbarInfo.contact_online.visibility = View.VISIBLE
-            AppStates.OFFLINE.state -> mToolbarInfo.contact_online.visibility = View.INVISIBLE
-        }
         if (mReceivingUser.fullname.isEmpty()) {
             mToolbarInfo.toolbar_chat_fullname.text = group.fullname
 

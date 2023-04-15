@@ -49,7 +49,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                                 REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
                                     .updateChildren(dateMap)
                                     .addOnSuccessListener {
-                                        showToast("Добро пожаловать")
+//                                        showToast("Добро пожаловать")
                                         restartActivity()
                                         hideKeyboard()
                                     }

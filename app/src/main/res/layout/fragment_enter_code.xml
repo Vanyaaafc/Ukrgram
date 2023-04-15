@@ -10,12 +10,12 @@
         android:id="@+id/register_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:layout_marginTop="50dp"
         android:contentDescription="@string/cd_register_image"
         android:src="@drawable/register_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/register_text_enter_code"
@@ -29,7 +29,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_image" />
+        app:layout_constraintTop_toBottomOf="@+id/register_image"
+         />
 
     <TextView
         android:id="@+id/register_text_sms"
@@ -39,6 +40,8 @@
         android:layout_margin="@dimen/vertical_margin"
         android:gravity="center"
         android:text="@string/register_text_sms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_text_enter_code" />
 
 
@@ -48,6 +51,7 @@
         android:layout_width="wrap_content"
         android:autofillHints=""
         android:gravity="center"
+        android:background="@drawable/ic_rectangle"
         android:hint="@string/register_hint_default_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -23,6 +23,7 @@
         android:layout_height="14dp"
         android:layout_marginEnd="2dp"
         android:src="@drawable/ic_online"
+        android:visibility="invisible"
         app:civ_border_color="@color/white"
         app:civ_border_width="2dp"
         app:civ_circle_background_color="@color/white"

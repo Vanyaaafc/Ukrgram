@@ -1,10 +1,15 @@
 package com.example.ukrgram.ui.screens.main_list
 
+import android.app.AlertDialog
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.models.CommonModel
+import com.example.ukrgram.ui.screens.settings.ChangeNameFragment
 import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_main_list.*
 
@@ -21,6 +26,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
 
     override fun onResume() {
         super.onResume()
+        setHasOptionsMenu(true)
         APP_ACTIVITY.title = "Ukrgram"
         APP_ACTIVITY.mAppDrawer.enableDrawer()
         hideKeyboard()
@@ -93,5 +99,28 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                         mAdapter.updateListItems(newModel)
                     })
             })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.settings_main_action_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val builder = AlertDialog.Builder(APP_ACTIVITY)
+        builder.setTitle("Выход из аккаунта")
+        builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
+        builder.setPositiveButton("Да") { _, _ ->
+
+            AppStates.updateState(AppStates.OFFLINE)
+            AUTH.signOut()
+            restartActivity()
+
+        }
+        builder.setNegativeButton("Нет") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+        return true
     }
 }

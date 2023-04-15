@@ -16,11 +16,11 @@
     <string name="settings_menu_exit">Exit</string>
     <string name="register_text_enter_code">Enter a code</string>
     <string name="register_text_sms">We sent an SMS with a verification code to your phone</string>
-    <string name="register_hint_default_code">- - - - - -</string>
+    <string name="register_hint_default_code">Enter your code...</string>
     <string name="cd_register_image"></string>
     <string name="register_title_your_phone">Your phone</string>
     <string name="register_toast_enter_phone">Enter phone number</string>
-    <string name="register_phone_hint">---------</string>
+    <string name="register_phone_hint">Phone number...</string>
     <string name="settings_hint_input_name">Name</string>
     <string name="settings_hint_input_surname">Surname</string>
     <string name="settings_toast_name_is_empty">Name cannot be empty</string>
@@ -36,6 +36,7 @@
     <string name="field_empty">The field is empty</string>
     <string name="chat_cleared">Chat cleared</string>
     <string name="chat_delete">Chat delete</string>
+    <string name="welcome_to_ukrgram">Welcome to Ukrgram</string>
 
     <!-- MENU -->
     <string name="menu_create_group">Create a group</string>

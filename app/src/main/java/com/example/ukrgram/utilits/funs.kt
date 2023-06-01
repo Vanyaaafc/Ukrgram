@@ -42,7 +42,7 @@ fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
             .commit()
     }
 }
-
+//
 
 fun hideKeyboard() {
     val imm: InputMethodManager =

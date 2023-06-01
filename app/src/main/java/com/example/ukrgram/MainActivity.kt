@@ -1,9 +1,7 @@
 package com.example.ukrgram
 
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -16,8 +14,6 @@ import com.example.ukrgram.ui.screens.main_list.MainListFragment
 import com.example.ukrgram.ui.screens.register.EnterPhoneNumberFragment
 import com.example.ukrgram.utilits.*
 import com.google.firebase.auth.FirebaseAuth
-import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.contact_item.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -81,6 +77,11 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         AppStates.updateState(AppStates.OFFLINE)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        AppStates.updateState(AppStates.ONLINE)
     }
 
     override fun onDestroy() {

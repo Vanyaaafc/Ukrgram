@@ -323,9 +323,12 @@ fun sendMessageToGroup(message: String, groupID: String, typeText: String, funct
     mapMessage[CHILD_TIMESTAMP] = ServerValue.TIMESTAMP
 
 
+
     REF_DATABASE_ROOT.child(RefMessages).child(messageKey.toString())
         .updateChildren(mapMessage)
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
+
+
 

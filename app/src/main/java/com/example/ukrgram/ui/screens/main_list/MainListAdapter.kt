@@ -42,8 +42,6 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
                 TYPE_CHAT -> replaceFragment(SingleChatFragment(listItems[holder.adapterPosition]))
                 TYPE_GROUP -> replaceFragment(GroupChatFragment(listItems[holder.adapterPosition]))
             }
-
-
         }
         return holder
     }

@@ -30,7 +30,9 @@ fun restartActivity() {
 
 fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     if (addStack) {
-        APP_ACTIVITY.supportFragmentManager.beginTransaction()
+        val fragmentManager = APP_ACTIVITY.supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction
             .addToBackStack(null)
             .replace(R.id.data_сontainer, fragment)
             .commit()
@@ -40,7 +42,7 @@ fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
             .commit()
     }
 }
-
+//
 
 fun hideKeyboard() {
     val imm: InputMethodManager =

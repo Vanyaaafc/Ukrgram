@@ -65,8 +65,10 @@
     <string name="name_group">Enter a group name</string>
 
 
-
     <!-- GROUP -->
+
+
+
 
     <plurals name="count_members">
         <item quantity="one">%d participant</item>

@@ -3,10 +3,8 @@ package com.example.ukrgram.ui.screens.single_chat
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.*
 import android.widget.AbsListView
-import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,10 +21,8 @@ import com.example.ukrgram.utilits.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.DatabaseReference
 import com.theartofdev.edmodo.cropper.CropImage
-import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.choice_upload.*
-import kotlinx.android.synthetic.main.contact_item.*
 import kotlinx.android.synthetic.main.fragment_single_chat.*
 import kotlinx.android.synthetic.main.toolbar_info.view.*
 import kotlinx.android.synthetic.main.toolbar_info.view.toolbar_chat_fullname

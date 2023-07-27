@@ -18,7 +18,7 @@ class GoogleFragment : BaseFragment(R.layout.fragment_google) {
         APP_ACTIVITY.title = "Google"
         showWebView()
     }
-
+//
     private fun showWebView() {
         val webView = view?.findViewById<WebView>(R.id.webView)
         webView?.loadUrl("https://google.com")

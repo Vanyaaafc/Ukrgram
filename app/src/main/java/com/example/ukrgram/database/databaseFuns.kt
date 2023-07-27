@@ -229,13 +229,6 @@ fun saveToMainList(id: String, type: String) {
 }
 
 
-fun deleteChat(id: String, function: () -> Unit) {
-    REF_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID).child(id).removeValue()
-        .addOnFailureListener { showToast(it.message.toString()) }
-        .addOnSuccessListener { function() }
-    clearChat(id, function)
-}
-
 fun clearChat(id: String, function: () -> Unit) {
     REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID).child(id)
         .removeValue()
@@ -245,6 +238,13 @@ fun clearChat(id: String, function: () -> Unit) {
         }
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
+}
+
+fun deleteChat(id: String, function: () -> Unit) {
+    REF_DATABASE_ROOT.child(NODE_MAIN_LIST).child(CURRENT_UID).child(id).removeValue()
+        .addOnFailureListener { showToast(it.message.toString()) }
+        .addOnSuccessListener { function() }
+    clearChat(id, function)
 }
 
 fun createGroupToDatabase(
@@ -329,6 +329,3 @@ fun sendMessageToGroup(message: String, groupID: String, typeText: String, funct
         .addOnSuccessListener { function() }
         .addOnFailureListener { showToast(it.message.toString()) }
 }
-
-
-

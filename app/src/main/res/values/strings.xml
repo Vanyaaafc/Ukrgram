@@ -47,7 +47,7 @@
     <string name="menu_favorites">Favorites</string>
     <string name="Settings">Settings</string>
     <string name="menu_invite_friends">Invite friends</string>
-    <string name="menu_questions">Questions about  Ukrgram</string>
+    <string name="menu_questions">Google</string>
 
     <!-- MENU -->
 
@@ -59,15 +59,12 @@
     <string name="toolbar_create_group">Create a group</string>
 
 
-
     <!-- TOOLBAR -->
     <!-- GROUP -->
     <string name="name_group">Enter a group name</string>
 
 
     <!-- GROUP -->
-
-
 
 
     <plurals name="count_members">

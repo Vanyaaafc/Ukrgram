@@ -11,7 +11,6 @@ import java.lang.reflect.Executable
 
 class AppVoiceRecorder {
 
-
     private val mMediaRecorder = MediaRecorder()
     private lateinit var mFile: File
     private lateinit var mMessageKey: String

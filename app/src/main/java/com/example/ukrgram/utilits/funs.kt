@@ -28,6 +28,8 @@ fun restartActivity() {
     APP_ACTIVITY.finish()
 }
 
+
+
 fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
     if (addStack) {
         val fragmentManager = APP_ACTIVITY.supportFragmentManager
@@ -37,12 +39,14 @@ fun replaceFragment(fragment: Fragment, addStack: Boolean = true) {
             .replace(R.id.data_сontainer, fragment)
             .commit()
     } else {
-        APP_ACTIVITY.supportFragmentManager.beginTransaction()
+        val fragmentManager = APP_ACTIVITY.supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction
             .replace(R.id.data_сontainer, fragment)
             .commit()
     }
 }
-//
+
 
 fun hideKeyboard() {
     val imm: InputMethodManager =
@@ -110,5 +114,7 @@ fun getFilenameFromUri(uri: Uri): String {
 
 fun getPlurals(count: Int) =
     APP_ACTIVITY.resources.getQuantityString(R.plurals.count_members, count, count)
+
+
 
 

@@ -1,6 +1,7 @@
 package com.example.ukrgram.ui.screens.single_chat
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.view.*
@@ -53,6 +54,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     override fun onResume() {
         super.onResume()
+        setHasOptionsMenu(true)
         initFields()
         initToolbar()
         initRecycleView()
@@ -180,7 +182,7 @@ class SingleChatFragment(private val contact: CommonModel) :
 
     }
 
-    private fun updateData() {
+    internal fun updateData() {
         mSmoothScrollToPosition = false
         mIsScrolling = false
         mCountMessages += 10
@@ -269,24 +271,53 @@ class SingleChatFragment(private val contact: CommonModel) :
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
-        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
+    private fun clearChat() {
+        val builder = AlertDialog.Builder(APP_ACTIVITY)
+        builder.setTitle("Очистить чат")
+        builder.setMessage("Вы уверены, что хотите очистить чат?")
+        builder.setPositiveButton("Да") { _, _ ->
+            clearChat(contact.id) {
+                showToast(getString(R.string.chat_cleared))
+                replaceFragment(SingleChatFragment(contact))
+            }
+        }
+        builder.setNegativeButton("Нет") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //слушатель выбора пунктов выпадающего меню
-        when (item.itemId) {
-            R.id.menu_clear_chat -> clearChat(contact.id) {
-                showToast(getString(R.string.chat_cleared))
-                replaceFragment(MainListFragment())
-            }
-            R.id.menu_delete_chat -> deleteChat(contact.id) {
+    private fun deleteChat() {
+        val builder = AlertDialog.Builder(APP_ACTIVITY)
+        builder.setTitle("Удалить чат")
+        builder.setMessage("Вы уверены, что хотите удалить чат?")
+        builder.setPositiveButton("Да") { _, _ ->
+            deleteChat(contact.id) {
                 showToast(getString(R.string.chat_delete))
                 replaceFragment(MainListFragment())
             }
         }
-        return true
+        builder.setNegativeButton("Нет") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.create().show()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        activity?.menuInflater?.inflate(R.menu.single_chat_action_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // слушатель выбора пунктов выпадающего меню
+
+        when (item.itemId) {
+            R.id.menu_clear_chat -> {
+                clearChat()
+            }
+            R.id.menu_delete_chat -> {
+                deleteChat()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

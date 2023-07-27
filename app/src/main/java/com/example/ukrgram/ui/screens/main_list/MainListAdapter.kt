@@ -31,6 +31,7 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         val contactOnline: CircleImageView = view.contact_online
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainListViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.main_list_item, parent, false)
@@ -46,26 +47,22 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         return holder
     }
 
+
     override fun onBindViewHolder(holder: MainListViewHolder, position: Int) {
         mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS).child(listItems[position].id)
         mRefUsersListener = AppValueEventListener {
             val contact = it.getCommonModel()
-
-
 
             when (contact.state) {
                 AppStates.ONLINE.state -> holder.contactOnline.visibility = View.VISIBLE
                 AppStates.OFFLINE.state -> holder.contactOnline.visibility = View.INVISIBLE
             }
 
-
-
             holder.itemName.text = listItems[position].fullname
             holder.itemLastMessage.text = listItems[position].lastMessage
             holder.itemPhoto.downloadAndSetImage(listItems[position].photoUrl)
         }
         mRefUsers.addValueEventListener(mRefUsersListener)
-
     }
 
 
@@ -75,6 +72,4 @@ class MainListAdapter : RecyclerView.Adapter<MainListAdapter.MainListViewHolder>
         listItems.add(item)
         notifyItemInserted(listItems.size)
     }
-
-
 }

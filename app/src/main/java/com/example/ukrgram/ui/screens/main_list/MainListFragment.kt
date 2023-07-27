@@ -1,9 +1,14 @@
 package com.example.ukrgram.ui.screens.main_list
 
 import android.app.AlertDialog
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.content.Context
+import android.content.SharedPreferences
+import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat.recreate
+import androidx.core.graphics.drawable.DrawableCompat.applyTheme
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ukrgram.R
@@ -12,6 +17,7 @@ import com.example.ukrgram.models.CommonModel
 import com.example.ukrgram.ui.screens.settings.ChangeNameFragment
 import com.example.ukrgram.utilits.*
 import kotlinx.android.synthetic.main.fragment_main_list.*
+import java.lang.Exception
 
 
 class MainListFragment : Fragment(R.layout.fragment_main_list) {
@@ -22,7 +28,37 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
     private val mRefUsers = REF_DATABASE_ROOT.child(NODE_USERS)
     private val mRefMessages = REF_DATABASE_ROOT.child(NODE_MESSAGES).child(CURRENT_UID)
     private var mListItems = listOf<CommonModel>()
+    private lateinit var sharedPreferences: SharedPreferences
 
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        sharedPreferences = requireContext().getSharedPreferences("theme", Context.MODE_PRIVATE)
+        return inflater.inflate(R.layout.fragment_main_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val nightButton = view.findViewById<View>(R.id.ic_night_theme)
+        nightButton?.setOnClickListener {
+            // Получение текущего значения темы из SharedPreferences
+            val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
+
+            // Инвертирование значения темы
+            val newThemeValue = !isDarkTheme
+
+            // Сохранение нового значения темы в SharedPreferences
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("isDarkTheme", newThemeValue)
+            editor.apply()
+
+            // Применение новой темы
+            applyTheme(newThemeValue)
+
+        }
+    }
 
     override fun onResume() {
         super.onResume()
@@ -106,21 +142,38 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val builder = AlertDialog.Builder(APP_ACTIVITY)
-        builder.setTitle("Выход из аккаунта")
-        builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
-        builder.setPositiveButton("Да") { _, _ ->
-
-            AppStates.updateState(AppStates.OFFLINE)
-            AUTH.signOut()
-            restartActivity()
-
+        when (item.itemId) {
+            R.id.ic_exit -> {
+                val builder = AlertDialog.Builder(APP_ACTIVITY)
+                builder.setTitle("Выход из аккаунта")
+                builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
+                builder.setPositiveButton("Да") { _, _ ->
+                    AppStates.updateState(AppStates.OFFLINE)
+                    AUTH.signOut()
+                    restartActivity()
+                }
+                builder.setNegativeButton("Нет") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                val dialog = builder.create()
+                dialog.show()
+                return true
+            }
         }
-        builder.setNegativeButton("Нет") { dialog, _ ->
-            dialog.dismiss()
+        // Добавьте закрывающую фигурную скобку
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun applyTheme(isDarkTheme: Boolean) {
+        // Применение выбранной темы
+        if (isDarkTheme) {
+            // Включение ночной темы
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            // Включение светлой темы
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        val dialog = builder.create()
-        dialog.show()
-        return true
+        restartActivity()
     }
 }

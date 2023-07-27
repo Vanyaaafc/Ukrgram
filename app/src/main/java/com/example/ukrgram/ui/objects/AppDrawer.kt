@@ -10,8 +10,8 @@ import com.example.ukrgram.ui.screens.contacts.ContactsFragment
 import com.example.ukrgram.ui.screens.settings.SettingsFragment
 import com.example.ukrgram.utilits.APP_ACTIVITY
 import com.example.ukrgram.database.USER
-import com.example.ukrgram.ui.screens.groups.AddContactsAdapter
 import com.example.ukrgram.ui.screens.groups.AddContactsFragment
+import com.example.ukrgram.ui.screens.google.GoogleFragment
 import com.example.ukrgram.utilits.downloadAndSetImage
 import com.example.ukrgram.utilits.replaceFragment
 import com.mikepenz.materialdrawer.AccountHeader
@@ -109,7 +109,7 @@ class AppDrawer() {
                     .withIconTintingEnabled(true)
                     .withName(APP_ACTIVITY.getString(R.string.menu_questions))
                     .withSelectable(false)
-                    .withIcon(R.drawable.ic_menu_help)
+                    .withIcon(R.drawable.ic_search_google)
             ).withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
                     view: View?,
@@ -127,6 +127,7 @@ class AppDrawer() {
             1 -> replaceFragment(AddContactsFragment())
             7 -> replaceFragment(SettingsFragment())
             4 -> replaceFragment(ContactsFragment())
+            10 -> replaceFragment(GoogleFragment())
         }
     }
 

@@ -3,11 +3,14 @@ package com.example.ukrgram.ui.screens.main_list
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat.applyTheme
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -40,25 +43,7 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
         return inflater.inflate(R.layout.fragment_main_list, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val nightButton = view.findViewById<View>(R.id.ic_night_theme)
-        nightButton?.setOnClickListener {
-            // Получение текущего значения темы из SharedPreferences
-            val isDarkTheme = sharedPreferences.getBoolean("isDarkTheme", false)
 
-            // Инвертирование значения темы
-            val newThemeValue = !isDarkTheme
-
-            // Сохранение нового значения темы в SharedPreferences
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isDarkTheme", newThemeValue)
-            editor.apply()
-
-            // Применение новой темы
-            applyTheme(newThemeValue)
-
-        }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -147,20 +132,32 @@ class MainListFragment : Fragment(R.layout.fragment_main_list) {
                 val builder = AlertDialog.Builder(APP_ACTIVITY)
                 builder.setTitle("Выход из аккаунта")
                 builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
-                builder.setPositiveButton("Да") { _, _ ->
+                builder.setPositiveButton("Выйти") { _, _ ->
                     AppStates.updateState(AppStates.OFFLINE)
                     AUTH.signOut()
                     restartActivity()
                 }
-                builder.setNegativeButton("Нет") { dialog, _ ->
+
+                builder.setNegativeButton("Отмена") { dialog, _ ->
                     dialog.dismiss()
                 }
                 val dialog = builder.create()
+                dialog.setOnShowListener {
+                    val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    positiveButton.typeface = Typeface.DEFAULT_BOLD
+                    positiveButton.setTextColor(
+                        ContextCompat.getColor(
+                            APP_ACTIVITY,
+                            R.color.colorRedAlertDialog
+                        )
+                    )
+                    val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    negativeButton.typeface = Typeface.DEFAULT_BOLD
+                }
                 dialog.show()
                 return true
             }
         }
-        // Добавьте закрывающую фигурную скобку
         return super.onOptionsItemSelected(item)
     }
 

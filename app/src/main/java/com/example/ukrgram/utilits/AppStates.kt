@@ -2,8 +2,6 @@ package com.example.ukrgram.utilits
 
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
-import com.example.ukrgram.ui.screens.base.BaseFragment
-import kotlinx.android.synthetic.main.contact_item.*
 
 enum class AppStates(val state: String) {
     ONLINE(APP_ACTIVITY.getString(R.string.online_state_string)),

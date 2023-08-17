@@ -90,8 +90,12 @@ class SingleChatFragment(private val contact: CommonModel) :
                     if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                         //TODO record
                         chat_input_message.setText("Запись")
-                        chat_btn_voice.setColorFilter(ContextCompat.getColor(APP_ACTIVITY,
-                            R.color.colorPrimary))
+                        chat_btn_voice.setColorFilter(
+                            ContextCompat.getColor(
+                                APP_ACTIVITY,
+                                R.color.colorPrimary
+                            )
+                        )
                         val messageKey = getMessageKey(contact.id)
                         mAppVoiceRecorder.startRecord(messageKey)
                     } else if (motionEvent.action == MotionEvent.ACTION_UP) {
@@ -99,10 +103,12 @@ class SingleChatFragment(private val contact: CommonModel) :
                         chat_input_message.setText("")
                         chat_btn_voice.colorFilter = null
                         mAppVoiceRecorder.stopRecord { file, messageKey ->
-                            uploadFileToStorage(Uri.fromFile(file),
+                            uploadFileToStorage(
+                                Uri.fromFile(file),
                                 messageKey,
                                 contact.id,
-                                TYPE_MESSAGE_VOICE)
+                                TYPE_MESSAGE_VOICE
+                            )
                             mSmoothScrollToPosition = true
                         }
                     }
@@ -240,15 +246,18 @@ class SingleChatFragment(private val contact: CommonModel) :
                     uploadFileToStorage(uri, messageKey, contact.id, TYPE_MESSAGE_IMAGE)
                     mSmoothScrollToPosition = true
                 }
+
                 PICK_FILE_REQUEST_CODE -> {
                     val uri = data.data
                     val messageKey = getMessageKey(contact.id)
                     val filename = getFilenameFromUri(uri!!)
-                    uploadFileToStorage(uri,
+                    uploadFileToStorage(
+                        uri,
                         messageKey,
                         contact.id,
                         TYPE_MESSAGE_FILE,
-                        filename)
+                        filename
+                    )
                     mSmoothScrollToPosition = true
                 }
             }
@@ -314,6 +323,7 @@ class SingleChatFragment(private val contact: CommonModel) :
             R.id.menu_clear_chat -> {
                 clearChat()
             }
+
             R.id.menu_delete_chat -> {
                 deleteChat()
             }

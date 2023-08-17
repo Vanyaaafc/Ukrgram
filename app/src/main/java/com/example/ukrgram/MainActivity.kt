@@ -5,10 +5,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.example.ukrgram.database.AUTH
 import com.example.ukrgram.database.initFirebase
 import com.example.ukrgram.database.initUser
 import com.example.ukrgram.databinding.ActivityMainBinding
+import com.example.ukrgram.livedata.MyLiveData
 import com.example.ukrgram.ui.objects.AppDrawer
 import com.example.ukrgram.ui.screens.main_list.MainListFragment
 import com.example.ukrgram.ui.screens.register.EnterPhoneNumberFragment
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
     lateinit var mAppDrawer: AppDrawer
     lateinit var mToolbar: Toolbar
+    private val myLiveData = MyLiveData()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +42,25 @@ class MainActivity : AppCompatActivity() {
             }
             initFields()
             initFunc()
+
+            myLiveData.observe(this, Observer {
+
+            })
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        myLiveData.observe(this, Observer {
+
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        myLiveData.removeObserver(Observer {
+
+        })
     }
 
 
@@ -59,35 +81,6 @@ class MainActivity : AppCompatActivity() {
         AUTH = FirebaseAuth.getInstance()
     }
 
-    override fun onStart() {
-        super.onStart()
-        AppStates.updateState(AppStates.ONLINE)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        AppStates.updateState(AppStates.OFFLINE)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        AppStates.updateState(AppStates.ONLINE)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        AppStates.updateState(AppStates.OFFLINE)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        AppStates.updateState(AppStates.ONLINE)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        AppStates.updateState(AppStates.OFFLINE)
-    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -95,8 +88,10 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (ContextCompat.checkSelfPermission(APP_ACTIVITY,
-                READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                APP_ACTIVITY,
+                READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             initContacts()
         }

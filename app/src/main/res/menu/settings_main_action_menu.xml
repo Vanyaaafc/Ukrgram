@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/ic_night_theme"
-        android:icon="@drawable/ic_night_theme"
-        android:title=""
-        app:showAsAction="ifRoom">
-    </item>
 
     <item
         android:id="@+id/ic_exit"

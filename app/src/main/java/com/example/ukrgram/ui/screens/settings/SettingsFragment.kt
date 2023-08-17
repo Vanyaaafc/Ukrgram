@@ -2,10 +2,12 @@ package com.example.ukrgram.ui.screens.settings
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.ukrgram.R
 import com.example.ukrgram.database.*
 import com.example.ukrgram.ui.screens.base.BaseFragment
@@ -80,20 +82,33 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 val builder = AlertDialog.Builder(APP_ACTIVITY)
                 builder.setTitle("Выход из аккаунта")
                 builder.setMessage("Вы уверены, что хотите выйти из аккаунта?")
-                builder.setPositiveButton("Да") { _, _ ->
+                builder.setPositiveButton("Выйти") { _, _ ->
 
                     AppStates.updateState(AppStates.OFFLINE)
                     AUTH.signOut()
                     restartActivity()
                 }
-                builder.setNegativeButton("Нет") { dialog, _ ->
+                builder.setNegativeButton("Отмена") { dialog, _ ->
                     dialog.dismiss()
                 }
 
                 val dialog = builder.create()
+                dialog.setOnShowListener {
+                    val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    positiveButton.typeface = Typeface.DEFAULT_BOLD
+                    positiveButton.setTextColor(
+                        ContextCompat.getColor(
+                            APP_ACTIVITY,
+                            R.color.colorRedAlertDialog
+                        )
+                    )
+                    val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    negativeButton.typeface = Typeface.DEFAULT_BOLD
+                }
                 dialog.show()
                 return true
             }
+
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
